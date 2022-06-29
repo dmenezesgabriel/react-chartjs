@@ -4,7 +4,7 @@ import classes from "./barChart.module.css";
 
 Chart.register(...registerables);
 
-export const BarChart = ({ label, labels, data }) => {
+export const BarChart = ({ data, options }) => {
   const ref = useRef();
 
   useEffect(() => {
@@ -12,19 +12,8 @@ export const BarChart = ({ label, labels, data }) => {
 
     let barChart = new Chart(canvasRef, {
       type: "bar",
-      data: {
-        //Bring in data
-        labels: labels,
-        datasets: [
-          {
-            label: label,
-            data: data,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-      },
+      data: data,
+      options: options,
     });
     // when component unmounts
     return () => {
