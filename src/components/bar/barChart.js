@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Chart, registerables } from "chart.js";
+import classes from "./barChart.module.css";
 
 Chart.register(...registerables);
 export const BarChart = () => {
@@ -29,5 +30,9 @@ export const BarChart = () => {
     };
   }, []);
 
-  return <canvas ref={chartRef}></canvas>;
+  return (
+    <div className={classes.graphContainer}>
+      <canvas ref={chartRef}></canvas>
+    </div>
+  );
 };
