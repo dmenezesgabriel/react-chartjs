@@ -1,9 +1,5 @@
 import React from "react";
 import "./App.scss";
-import { BarChart } from "./components/bar/barChart";
+import { Dashboard } from "./components/dashboard";
 
-export const App = () => (
-  <>
-    <BarChart />
-  </>
-);
+export const App = () => <Dashboard />;

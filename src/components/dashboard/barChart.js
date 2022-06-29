@@ -3,36 +3,38 @@ import { Chart, registerables } from "chart.js";
 import classes from "./barChart.module.css";
 
 Chart.register(...registerables);
-export const BarChart = () => {
-  const chartRef = useRef();
+
+export const BarChart = ({ label, labels, data }) => {
+  const ref = useRef();
 
   useEffect(() => {
-    const myChartRef = chartRef.current.getContext("2d");
-    let myChart = new Chart(myChartRef, {
+    const canvasRef = ref.current.getContext("2d");
+
+    let barChart = new Chart(canvasRef, {
       type: "bar",
       data: {
         //Bring in data
-        labels: ["Jan", "Feb", "March"],
+        labels: labels,
         datasets: [
           {
-            label: "Sales",
-            data: [86, 67, 91],
+            label: label,
+            data: data,
           },
         ],
       },
       options: {
-        //Customize chart options
+        responsive: true,
       },
     });
     // when component unmounts
     return () => {
-      myChart.destroy();
+      barChart.destroy();
     };
   }, []);
 
   return (
     <div className={classes.graphContainer}>
-      <canvas ref={chartRef}></canvas>
+      <canvas ref={ref}></canvas>
     </div>
   );
 };
