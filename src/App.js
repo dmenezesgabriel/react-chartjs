@@ -1,5 +1,5 @@
 import React from "react";
 import "./App.scss";
-import { Dashboard } from "./components/dashboard";
+import { Dashboard } from "./views/dashboard";
 
 export const App = () => <Dashboard />;

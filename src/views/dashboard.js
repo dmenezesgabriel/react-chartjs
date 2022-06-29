@@ -1,4 +1,4 @@
-import { BarChart } from "./dashboard/barChart";
+import { BarChart } from "../components/dashboard/barChart";
 
 export const Dashboard = () => (
   <>
