@@ -10,10 +10,6 @@ export const BarChart = ({ data, width, height, options }) => {
   const ref = useRef();
 
   useEffect(() => {
-    if (!data) {
-      return <pre>'loading...'</pre>;
-    }
-
     const canvasRef = ref.current.getContext("2d");
 
     let barChart = new Chart(canvasRef, {
