@@ -9,9 +9,12 @@ const csvUrl =
 export const Dashboard = () => {
   const [data, setData] = useState(null);
   const [dataSet, setDataSet] = useState(null);
-  const [value, setValue] = useState("All");
   const [genres, setGenres] = useState([]);
   const [studios, setStudios] = useState([]);
+  const [filters, setFilters] = useState({
+    Genre: "All",
+    "Lead Studio": "All",
+  });
 
   useEffect(() => {
     csv(csvUrl).then((data) => {
@@ -27,7 +30,8 @@ export const Dashboard = () => {
   }
 
   const handleChange = (event, column) => {
-    setValue(event.target.value);
+    // Must implement recursion
+    filters[column] = event.target.value;
     if (event.target.value == "All") {
       setDataSet(data);
     } else {
@@ -37,6 +41,7 @@ export const Dashboard = () => {
         }
       });
       setDataSet(filteredData);
+      setFilters(filters);
     }
   };
 
@@ -45,13 +50,13 @@ export const Dashboard = () => {
       <Dropdown
         label={"Genre"}
         options={genres}
-        value={value}
+        value={filters["Genre"]}
         onChange={(event) => handleChange(event, "Genre")}
       />
       <Dropdown
         label={"Studio"}
         options={studios}
-        value={value}
+        value={filters["Lead Studio"]}
         onChange={(event) => handleChange(event, "Lead Studio")}
       />
       <ProfitabilityByGenre dataSet={dataSet} />
