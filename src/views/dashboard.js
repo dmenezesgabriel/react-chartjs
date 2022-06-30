@@ -1,5 +1,4 @@
 import { ProfitabilityByGenre } from "./profitabilityByGenre";
-import { useData } from "../utils/getData";
 import { Dropdown } from "../components/form/dropdown";
 import { useEffect, useState } from "react";
 import { csv } from "d3";
@@ -12,12 +11,14 @@ export const Dashboard = () => {
   const [dataSet, setDataSet] = useState(null);
   const [value, setValue] = useState("All");
   const [genres, setGenres] = useState([]);
+  const [studios, setStudios] = useState([]);
 
   useEffect(() => {
     csv(csvUrl).then((data) => {
       setData(data);
       setDataSet(data);
       setGenres(["All", ...new Set(data.map((d) => d.Genre))]);
+      setStudios(["All", ...new Set(data.map((d) => d["Lead Studio"]))]);
     });
   }, []);
 
@@ -25,19 +26,18 @@ export const Dashboard = () => {
     return <pre>'loading...'</pre>;
   }
 
-  const handleChange = (event) => {
+  const handleChange = (event, column) => {
     setValue(event.target.value);
     if (event.target.value == "All") {
       setDataSet(data);
     } else {
       let filteredData = data.filter((d) => {
-        if (d.Genre == event.target.value) {
+        if (d[column] == event.target.value) {
           return d;
         }
       });
       setDataSet(filteredData);
     }
-    console.log(event.target.value);
   };
 
   return (
@@ -46,7 +46,13 @@ export const Dashboard = () => {
         label={"Genre"}
         options={genres}
         value={value}
-        onChange={handleChange}
+        onChange={(event) => handleChange(event, "Genre")}
+      />
+      <Dropdown
+        label={"Studio"}
+        options={studios}
+        value={value}
+        onChange={(event) => handleChange(event, "Lead Studio")}
       />
       <ProfitabilityByGenre dataSet={dataSet} />
     </>
