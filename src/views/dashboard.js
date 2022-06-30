@@ -36,7 +36,11 @@ export const Dashboard = () => {
       setDataSet(data);
     } else {
       let filteredData = data.filter((d) => {
-        if (d[column] == event.target.value) {
+        if (
+          (d["Genre"] == filters["Genre"] || filters["Genre"] == "All") &&
+          (d["Lead Studio"] == filters["Lead Studio"] ||
+            filters["Lead Studio"] == "All")
+        ) {
           return d;
         }
       });
