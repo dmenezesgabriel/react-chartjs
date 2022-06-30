@@ -6,10 +6,14 @@ import classes from "./barChart.module.css";
 
 Chart.register(...registerables, ChartDataLabels);
 
-export const BarChart = ({ data, options }) => {
+export const BarChart = ({ data, width, height, options }) => {
   const ref = useRef();
 
   useEffect(() => {
+    if (!data) {
+      return <pre>'loading...'</pre>;
+    }
+
     const canvasRef = ref.current.getContext("2d");
 
     let barChart = new Chart(canvasRef, {
@@ -25,7 +29,7 @@ export const BarChart = ({ data, options }) => {
 
   return (
     <div className={classes.graphContainer}>
-      <canvas ref={ref}></canvas>
+      <canvas ref={ref} width={width} height={height}></canvas>
     </div>
   );
 };
