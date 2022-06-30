@@ -1,5 +1,6 @@
-import { ProfitabilityByGenre } from "./profitabilityByGenre";
+import { BarChart } from "../components/charts/barChart";
 import { Dropdown } from "../components/form/dropdown";
+import { profitabilityByGenre } from "../utils/calculations/profitabilityByGenre";
 import { useEffect, useState } from "react";
 import { csv } from "d3";
 
@@ -44,6 +45,18 @@ export const Dashboard = () => {
     setFilters(filters);
   };
 
+  const options = {
+    plugins: {
+      datalabels: {
+        anchor: "end",
+        align: "top",
+        formatter: Math.round,
+        font: { weigth: "bold", size: 10 },
+      },
+    },
+    scales: { yAxis: { display: false } },
+  };
+
   return (
     <>
       <Dropdown
@@ -58,7 +71,7 @@ export const Dashboard = () => {
         value={filters["Lead Studio"]}
         onChange={(event) => handleChange(event, "Lead Studio")}
       />
-      <ProfitabilityByGenre dataSet={dataSet} />
+      <BarChart data={profitabilityByGenre(dataSet)} options={options} />;
     </>
   );
 };
