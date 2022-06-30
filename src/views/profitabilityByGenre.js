@@ -1,4 +1,4 @@
-import { BarChart } from "../components/dashboard/barChart";
+import { BarChart } from "../components/charts/barChart";
 import { rollup, sum } from "d3";
 
 export const ProfitabilityByGenre = ({ dataSet }) => {
