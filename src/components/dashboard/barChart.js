@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
 import { Chart, registerables } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+
 import classes from "./barChart.module.css";
 
-Chart.register(...registerables);
+Chart.register(...registerables, ChartDataLabels);
 
 export const BarChart = ({ data, options }) => {
   const ref = useRef();

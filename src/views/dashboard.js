@@ -1,5 +1,4 @@
 import { BarChart } from "../components/dashboard/barChart";
-
 export const Dashboard = () => {
   const data = {
     labels: ["Jan", "Feb", "March"],
@@ -11,7 +10,17 @@ export const Dashboard = () => {
     ],
   };
 
-  const options = {};
+  const options = {
+    plugins: {
+      datalabels: {
+        anchor: "end",
+        align: "top",
+        formatter: Math.round,
+        font: { weigth: "bold", size: 16 },
+      },
+    },
+    scales: { yAxis: { display: false } },
+  };
 
   return (
     <>
