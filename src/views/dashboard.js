@@ -17,12 +17,16 @@ export const Dashboard = () => {
     "Lead Studio": "All",
   });
 
+  const getOptions = (data, columnName) => {
+    return ["All", ...new Set(data.map((d) => d[columnName]))];
+  };
+
   useEffect(() => {
     csv(csvUrl).then((data) => {
       setData(data);
       setDataSet(data);
-      setGenres(["All", ...new Set(data.map((d) => d.Genre))]);
-      setStudios(["All", ...new Set(data.map((d) => d["Lead Studio"]))]);
+      setGenres(getOptions(data, "Genre"));
+      setStudios(getOptions(data, "Lead Studio"));
     });
   }, []);
 
