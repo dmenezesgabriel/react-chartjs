@@ -9,10 +9,16 @@ const csvUrl =
 
 export const Dashboard = () => {
   const [data, setData] = useState(null);
-  const [value, setValue] = useState("Drama");
+  const [dataSet, setDataSet] = useState(null);
+  const [value, setValue] = useState("All");
+  const [genres, setGenres] = useState([]);
 
   useEffect(() => {
-    csv(csvUrl).then(setData);
+    csv(csvUrl).then((data) => {
+      setData(data);
+      setDataSet(data);
+      setGenres(["All", ...new Set(data.map((d) => d.Genre))]);
+    });
   }, []);
 
   if (!data) {
@@ -21,12 +27,16 @@ export const Dashboard = () => {
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    let filteredData = data.filter((d) => {
-      if (d.Genre == event.target.value) {
-        return d;
-      }
-    });
-    setData(filteredData);
+    if (event.target.value == "All") {
+      setDataSet(data);
+    } else {
+      let filteredData = data.filter((d) => {
+        if (d.Genre == event.target.value) {
+          return d;
+        }
+      });
+      setDataSet(filteredData);
+    }
     console.log(event.target.value);
   };
 
@@ -34,11 +44,11 @@ export const Dashboard = () => {
     <>
       <Dropdown
         label={"Genre"}
-        options={[...new Set(data.map((d) => d.Genre))]}
+        options={genres}
         value={value}
-        // onChange={handleChange}
+        onChange={handleChange}
       />
-      <ProfitabilityByGenre dataSet={data} />
+      <ProfitabilityByGenre dataSet={dataSet} />
     </>
   );
 };

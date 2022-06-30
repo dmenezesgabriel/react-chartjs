@@ -21,7 +21,7 @@ export const BarChart = ({ data, width, height, options }) => {
     return () => {
       barChart.destroy();
     };
-  }, []);
+  }, [data]);
 
   return (
     <div className={classes.graphContainer}>

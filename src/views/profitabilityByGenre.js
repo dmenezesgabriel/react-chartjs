@@ -37,6 +37,6 @@ export const ProfitabilityByGenre = ({ dataSet }) => {
     },
     scales: { yAxis: { display: false } },
   };
-
+  console.log(data);
   return <BarChart data={data} options={options} />;
 };
