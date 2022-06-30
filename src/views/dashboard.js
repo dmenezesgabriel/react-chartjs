@@ -30,23 +30,18 @@ export const Dashboard = () => {
   }
 
   const handleChange = (event, column) => {
-    // Must implement recursion
     filters[column] = event.target.value;
-    if (event.target.value == "All") {
-      setDataSet(data);
-    } else {
-      let filteredData = data.filter((d) => {
-        if (
-          (d["Genre"] == filters["Genre"] || filters["Genre"] == "All") &&
-          (d["Lead Studio"] == filters["Lead Studio"] ||
-            filters["Lead Studio"] == "All")
-        ) {
-          return d;
-        }
-      });
-      setDataSet(filteredData);
-      setFilters(filters);
-    }
+    let filteredData = data.filter((d) => {
+      // all([true, false, true])
+      let shouldReturn = Object.keys(filters)
+        .map((key) => filters[key].includes(d[key]) || filters[key] == "All")
+        .every((element) => element === true);
+      if (shouldReturn) {
+        return d;
+      }
+    });
+    setDataSet(filteredData);
+    setFilters(filters);
   };
 
   return (
