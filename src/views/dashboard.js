@@ -3,6 +3,7 @@ import { Dropdown } from "../components/form/dropdown";
 import { profitabilityByGenre } from "../utils/calculations/profitabilityByGenre";
 import { useEffect, useState } from "react";
 import { csv } from "d3";
+import { DropdownCheckbox } from "../components/form/dropdownCheckbox";
 
 const csvUrl =
   "https://gist.githubusercontent.com/dmenezesgabriel/d138a218e5d6d064b40b45f693c27b42/raw/3919b288f6663e8c406d7286a78f23f0721fc752/HollywoodsMostProfitableStories.csv";
@@ -45,6 +46,7 @@ export const Dashboard = () => {
         return d;
       }
     });
+    console.log(filters);
     setDataSet(filteredData);
     setFilters(filters);
   };
@@ -75,7 +77,13 @@ export const Dashboard = () => {
         value={filters["Lead Studio"]}
         onChange={(event) => handleChange(event, "Lead Studio")}
       />
-      <BarChart data={profitabilityByGenre(dataSet)} options={options} />;
+      <DropdownCheckbox
+        label={"Studio"}
+        options={studios}
+        value={filters["Lead Studio"]}
+        onChange={(event) => handleChange(event, "Lead Studio")}
+      />
+      <BarChart data={profitabilityByGenre(dataSet)} options={options} />
     </>
   );
 };
