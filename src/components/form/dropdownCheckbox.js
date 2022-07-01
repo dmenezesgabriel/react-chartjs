@@ -13,19 +13,17 @@ export const DropdownCheckbox = ({ label, options, value, onChange }) => {
       <span className={classes.anchor} onClick={showList}>
         {value}
       </span>
-      {
+      {visible ? (
         <ul className={classes.items}>
           {options.map((item, index) => {
-            if (visible) {
-              return (
-                <li key={index}>
-                  <CheckBox id={item} text={item} />
-                </li>
-              );
-            }
+            return (
+              <li key={index}>
+                <CheckBox id={item} text={item} />
+              </li>
+            );
           })}
         </ul>
-      }
+      ) : null}
     </div>
   );
 };

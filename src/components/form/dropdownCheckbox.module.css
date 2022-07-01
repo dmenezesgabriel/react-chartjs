@@ -28,10 +28,15 @@
 }
 
 .dropdownCheckList ul.items {
+  background-color: #fff;
   text-align: left;
   padding: 2px;
   /* display: none; */
   margin: 0;
+  position: absolute;
+  z-index: 10;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .dropdownCheckList ul.items li {
