@@ -1,14 +1,15 @@
 .dropdownCheckList {
   display: inline-block;
-  border: 1px solid #ccc;
   border-radius: 5px;
 }
 
 .dropdownCheckList .anchor {
+  width: 100%;
   position: relative;
   cursor: pointer;
   display: inline-block;
   padding: 5px 50px 5px 10px;
+  border: 1px solid #ccc;
 }
 
 .dropdownCheckList .anchor:after {

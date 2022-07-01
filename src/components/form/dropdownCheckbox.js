@@ -10,6 +10,7 @@ export const DropdownCheckbox = ({ label, options, value, onChange }) => {
 
   return (
     <div className={classes.dropdownCheckList}>
+      {label}
       <span className={classes.anchor} onClick={showList}>
         {value}
       </span>
