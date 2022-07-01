@@ -51,6 +51,12 @@ export const Dashboard = () => {
     setFilters(filters);
   };
 
+  const handleCheck = (event) => {
+    console.log(event.target.id);
+    console.log(event.target.checked);
+    console.log(event.target.name);
+  };
+
   const options = {
     plugins: {
       datalabels: {
@@ -81,7 +87,7 @@ export const Dashboard = () => {
         label={"Studio"}
         options={studios}
         value={filters["Lead Studio"]}
-        onChange={(event) => handleChange(event, "Lead Studio")}
+        onChange={handleCheck}
       />
       <BarChart data={profitabilityByGenre(dataSet)} options={options} />
     </>

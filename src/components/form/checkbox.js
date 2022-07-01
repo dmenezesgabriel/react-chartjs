@@ -1,6 +1,12 @@
-export const CheckBox = ({ id, text }) => (
+export const CheckBox = ({ id, text, type, name, onChange, checked }) => (
   <label htmlFor={id}>
-    <input type="checkbox" id={id} />
+    <input
+      type={type}
+      id={id}
+      name={name}
+      onChange={onChange}
+      checked={checked}
+    />
     {text}
   </label>
 );
